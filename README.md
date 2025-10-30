@@ -21,7 +21,7 @@ A Hono + TypeScript + PNPM + Jest + Prisma server with PostgreSQL and Redis.
    ```bash
    cp .env.example .env
    ```
-   
+
    The default `.env` configuration works with Docker Compose out of the box:
    ```
    DATABASE_URL="postgresql://telemed:telemed123@localhost:5432/telemed?schema=public"
@@ -85,36 +85,3 @@ If you prefer to install PostgreSQL and Redis manually:
 - `GET /users` - Get all users
 - `GET /users/:id` - Get user by ID
 - `POST /users` - Create a new user
-
-## Project Structure
-
-```
-.
-├── prisma/
-│   └── schema.prisma    # Prisma schema
-├── src/
-│   ├── __tests__/       # Jest tests
-│   ├── db.ts            # Prisma client instance
-│   ├── redis.ts         # Redis client instance
-│   └── index.ts         # Main server file
-├── .env.example         # Environment variables template
-├── docker-compose.yml   # Docker services configuration
-├── jest.config.js       # Jest configuration
-├── package.json         # Dependencies and scripts
-└── tsconfig.json        # TypeScript configuration
-```
-
-## Database Schema
-
-The application includes a basic User model:
-
-```prisma
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-```
